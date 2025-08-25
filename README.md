@@ -164,3 +164,7 @@ desafio-amazon-cypress/
 
 ## Licença
 Uso livre para estudos.
+
+
+## TestRail:
+https://marcosthecruz.testrail.io/index.php?/suites/view/1&group_by=cases:section_id&group_order=asc&display=tree&display_deleted_cases=0
