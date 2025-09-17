@@ -168,3 +168,139 @@ Uso livre para estudos.
 
 ## TestRail:
 https://marcosthecruz.testrail.io/index.php?/suites/view/1&group_by=cases:section_id&group_order=asc&display=tree&display_deleted_cases=0
+
+
+## 🔹 **Formas de Rodar o Cypress**
+
+### 1. **Modo Interativo (UI)**
+
+```bash
+npx cypress open
+```
+
+* Abre a interface gráfica do Cypress.
+* Permite escolher os testes e executá-los manualmente.
+* Útil para debug e desenvolvimento, pois dá para assistir o teste rodando passo a passo.
+
+---
+
+### 2. **Modo Headless (linha de comando)**
+
+```bash
+npx cypress run
+```
+
+* Executa todos os testes **sem abrir o navegador** (por padrão usa Electron).
+* Gera relatórios de execução automaticamente.
+* Mais usado em **CI/CD pipelines**.
+
+---
+
+### 3. **Rodar em um Navegador Específico**
+
+```bash
+npx cypress run --browser chrome
+npx cypress run --browser edge
+npx cypress run --browser firefox
+```
+
+* Permite escolher qual navegador usar (além do Electron padrão).
+* Útil para validar compatibilidade entre browsers.
+
+---
+
+### 4. **Rodar Apenas um Especifico Arquivo de Teste**
+
+```bash
+npx cypress run --spec "cypress/e2e/login.cy.js"
+```
+
+* Executa somente o(s) arquivo(s) indicado(s).
+* Bom para rodar smoke tests ou cenários críticos.
+
+---
+
+### 5. **Rodar Vários Specs via Pattern**
+
+```bash
+npx cypress run --spec "cypress/e2e/**/*.cy.js"
+```
+
+* Executa testes que seguem um padrão de caminho ou nome.
+* Exemplo: rodar apenas testes de regressão ou apenas mobile.
+
+---
+
+### 6. **Rodar em Headed Mode (com navegador visível)**
+
+```bash
+npx cypress run --headed
+```
+
+* Roda em **headless**, mas mantendo o navegador visível.
+* Útil para ver o comportamento do teste em execução sem abrir a UI completa (`cypress open`).
+
+---
+
+### 7. **Rodar em Headless + Headed com Navegador**
+
+```bash
+npx cypress run --browser chrome --headed
+```
+
+* Combina as opções: executa com um navegador específico e mostra a execução.
+
+---
+
+### 8. **Rodar Testes em Modo CI/CD com Reports**
+
+```bash
+npx cypress run --reporter mochawesome
+```
+
+* Executa em modo headless, mas gera relatórios customizados (HTML/JSON).
+* Essencial para pipelines de QA.
+
+---
+
+### 9. **Rodar com Configurações Customizadas**
+
+```bash
+npx cypress run --config viewportWidth=375,viewportHeight=812
+```
+
+* Permite alterar configurações direto no comando (ex.: simular iPhone).
+* Substitui temporariamente o `cypress.config.js`.
+
+---
+
+### 10. **Rodar com Environment Variables**
+
+```bash
+npx cypress run --env ENV=qa,username=admin,password=123
+```
+
+* Define variáveis de ambiente para os testes.
+* Útil para rodar em diferentes ambientes (QA, Homolog, Prod).
+
+---
+
+### 11. **Rodar em Paralelo (Cypress Cloud ou CI)**
+
+```bash
+npx cypress run --record --parallel --key <chave-do-projeto>
+```
+
+* Divide os testes em múltiplas máquinas para acelerar a execução.
+* Necessita do **Cypress Cloud** ou integração com CI/CD.
+
+---
+
+👉 Resumindo:
+
+* **Desenvolvimento/Debug** → `cypress open`, `--headed`
+* **CI/CD** → `cypress run`, `--reporter`, `--env`, `--config`
+* **Cross-browser** → `--browser`
+* **Escopo específico** → `--spec` ou patterns
+
+---

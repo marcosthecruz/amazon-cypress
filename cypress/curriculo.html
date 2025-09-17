@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo - Marcos Vinicius Cruz de Souza</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--secondary-color);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-info p {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .toggle-section {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .objective {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--dark-color);
+            text-align: center;
+        }
+        
+        .timeline-item {
+            padding: 15px 0;
+            border-left: 2px solid var(--secondary-color);
+            padding-left: 25px;
+            margin-left: 10px;
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            left: -9px;
+            top: 20px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-description {
+            margin-top: 10px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-item {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+        }
+        
+        .language-level {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+        
+        .tab-container {
+            margin-top: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .tab-button.active {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .tab-button.active:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .achievement {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (min-width: 768px) {
+            .profile {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .profile-info {
+                text-align: left;
+                margin-left: 30px;
+            }
+        }
+        
+        /* Classes para testes com Cypress */
+        .test-target {
+            border: 2px dashed transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .test-target:hover {
+            border-color: var(--accent-color);
+        }
+        
+        .cypress-test-area {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile">
+                <img src="https://media.licdn.com/dms/image/v2/C4E03AQGsVu6ZL3ENyw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1624408496573?e=1759363200&v=beta&t=pCAIejtWNaUaGDcrQ761Q22Wmxtql51_T3NDnvB_wa8" 
+                     alt="Foto de Marcos Vinicius Cruz de Souza" class="profile-img">
+                <div class="profile-info">
+                    <h1>Marcos Vinicius Cruz de Souza</h1>
+                    <p>Nacionalidade: Brasileiro | Estado Civil: União Estável | Idade: 36</p>
+                    <p>Endereço: Rua Geracina, São Paulo, SP, 08062-060, Brasil</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📱</span>
+                            <a href="tel:+5511947902779" id="phone-link">+55 (11) 94790-2779</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <a href="mailto:marcosthecruz@gmail.com" id="email-link">marcosthecruz@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>🔗</span>
+                            <a href="https://linkedin.com/in/marcos-vinicius-cruz-6aaa222b" target="_blank" id="linkedin-link">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section" id="objective-section">
+            <h2 class="section-title">
+                Objetivo
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            <p class="objective test-target" data-testid="career-objective">Test Automation Engineer (QA)</p>
+        </section>
+
+        <section class="section" id="experience-section">
+            <h2 class="section-title">
+                Experiência Profissional
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="sempre-senior">Sempre IT - Sênior</button>
+                    <button class="tab-button" data-tab="sempre-pleno">Sempre IT - Pleno</button>
+                    <button class="tab-button" data-tab="autbank-tester">Autbank - Testes</button>
+                    <button class="tab-button" data-tab="autbank-support">Autbank - Suporte</button>
+                </div>
+                
+                <div class="tab-content active" id="sempre-senior">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Novembro de 2022 – Presente</div>
+                        <div class="timeline-title">Analista de Automação Sênior - Sempre IT</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Lider técnico e responsável pelo desenvolvimento da equipe de automação QA.</li>
+                                <li>Desenvolvimento E2E em automação funcional, com foco no backlog de automação mobile.</li>
+                                <li>Criação e apresentação de dashboards de resultados para stakeholders.</li>
+                                <li>Realização de reuniões diárias e levantamento de requisitos.</li>
+                                <li>Elaboração e modelagem de cenários de testes BDD.</li>
+                                <li>Mapeamento, criação, automação, refatoração e execução de testes.</li>
+                                <li>Relato, correção e acompanhamento de bugs.</li>
+                                <li>Manutenção e execução de pipelines.</li>
+                                <li>Participando de todo ciclo de vida do software (App Smiles).</li>
+                                <li class="test-target" data-testid="main-achievement"><strong>Maior feito:</strong> Implementação de novo framework de automação com WebdriverIO e javascript no projeto.</li>
+                                <li><strong>Ferramentas:</strong> VsCode, Eclipse, XCode, MobileiOS, Android Studio, Java, JavaScript, WebdriverIO, Cucumber, Gherkin, BDD, NodeJs, Appium, Selenium, Git, GitHub, Jira, Zephyr Scale, Jenkins, Postaman, RPA, Sauce Labs, BrowserStack, Kanban, Monday.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="sempre-pleno">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Outubro de 2020 - Novembro de 2022</div>
+                        <div class="timeline-title">Analista de Automação Pleno - Sempre IT</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Desenvolvimento end-to-end em automação funcional mobile.</li>
+                                <li>Levantamento de requisitos e elaboração de cenários de testes BDD.</li>
+                                <li>Mapeamento, criação, automação, refatoração e execução de testes.</li>
+                                <li>Relato, correção e acompanhamento de bugs.</li>
+                                <li>Manutenção e execução de pipelines.</li>
+                                <li><strong>Ferramentas:</strong> Eclipse, Octane, Application Lifecycle Management, Mobile Center, Bitbucket, Git, Bamboo, Appium, Jira.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="autbank-tester">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Maio de 2016 - Outubro de 2020</div>
+                        <div class="timeline-title">Analista de Testes - Autbank</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Planejamento, desenvolvimento, programação de scripts e execução de casos de teste.</li>
+                                <li>Uso da ferramenta Sahi (sintaxe própria + JavaScript) e SoapUI.</li>
+                                <li>Análise de documentos e requisitos de projetos.</li>
+                                <li>Realização de testes automatizados e de estresse.</li>
+                                <li>Garantia de qualidade em projetos/sistemas.</li>
+                                <li>Administração de bancos de dados (SQL Server) e servidores.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="autbank-support">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Junho de 2013 - Maio de 2016</div>
+                        <div class="timeline-title">Analista de Suporte Técnico - Autbank</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Suporte ao cliente e homologação de versões de sistemas (interno/externo).</li>
+                                <li>Consultoria e criação de casos de testes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education-section">
+            <h2 class="section-title">
+                Formação Acadêmica
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-title test-target" data-testid="education-item">Bacharel em Análise e Desenvolvimento de Sistemas - Estácio</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-title">Logística - ETEC Centro Paula Souza</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-title">Ensino Médio Completo</div>
+            </div>
+        </section>
+
+        <section class="section" id="skills-section">
+            <h2 class="section-title">
+                Habilidades Técnicas
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            
+            <div class="skills-grid">
+                <div class="skill-item test-target" data-testid="skill-item">
+                    <h3>WebdriverIO</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <h3>JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <h3>Appium</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <h3>Selenium</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <h3>BDD/Cucumber</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+                
+                <div class="skill-item">
+                    <h3>Git/GitHub</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%"></div>
+                    </div>
+                    <div class="language-level">
+                        <span>Iniciante</span>
+                        <span>Especialista</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="courses-section">
+            <h2 class="section-title">
+                Cursos Complementares
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            
+            <div class="skills-grid">
+                <div class="skill-item">Automação Full Stack com Ruby/BDD/Cucumber – QANinja</div>
+                <div class="skill-item">Testes Funcionais de Aplicações Android com Appium - Udemy</div>
+                <div class="skill-item">Programação Orientada a Objetos (C#) - Udemy</div>
+                <div class="skill-item">Desenvolvimento de Jogos 2D (Unity+C#) - Udemy</div>
+                <div class="skill-item">Curso Online de Programação de Games - TIMTec</div>
+                <div class="skill-item">Curso Online de JavaScript - TIMTec</div>
+                <div class="skill-item">Curso Online em Lógica de Programação - SENAI</div>
+                <div class="skill-item">Curso de Administração de Pessoas - FM-USP</div>
+                <div class="skill-item">Informática Básica (Pacote Office) - PRODAN</div>
+            </div>
+        </section>
+
+        <section class="section" id="languages-section">
+            <h2 class="section-title">
+                Idiomas
+                <button class="toggle-section" aria-label="Alternar visibilidade da seção">👁️</button>
+            </h2>
+            
+            <div class="skill-item">
+                <h3>Inglês</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 40%"></div>
+                </div>
+                <div class="language-level">
+                    <span>Iniciante</span>
+                    <span>Fluente</span>
+                </div>
+                <p class="test-target" data-testid="language-level">Nível: Básico (A2)</p>
+            </div>
+        </section>
+
+        <section class="cypress-test-area">
+            <h2>Área para Testes de Automação (Cypress)</h2>
+            <p>Esta seção contém elementos específicos para praticar testes de automação:</p>
+            
+            <div style="margin: 20px 0;">
+                <button id="test-button" style="padding: 10px 15px; margin: 5px;">Clique-me</button>
+                <input type="text" id="test-input" placeholder="Digite algo aqui" style="padding: 10px; width: 200px;">
+                <select id="test-select" style="padding: 10px; margin: 5px;">
+                    <option value="">Selecione uma opção</option>
+                    <option value="opt1">Opção 1</option>
+                    <option value="opt2">Opção 2</option>
+                    <option value="opt3">Opção 3</option>
+                </select>
+            </div>
+            
+            <div id="test-result" style="padding: 15px; background-color: #eee; border-radius: 5px;">
+                Resultado aparecerá aqui
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Currículo Interativo de Marcos Vinicius Cruz de Souza - 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidade para alternar abas de experiência
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remover classe active de todas as abas e conteúdos
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Adicionar classe active à aba clicada
+                button.classList.add('active');
+                
+                // Mostrar o conteúdo correspondente
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Funcionalidade para alternar visibilidade das seções
+        document.querySelectorAll('.toggle-section').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const section = e.target.closest('.section');
+                const content = section.querySelectorAll('> *:not(.section-title)');
+                
+                content.forEach(el => {
+                    if (el.style.display === 'none') {
+                        el.style.display = 'block';
+                        button.textContent = '👁️';
+                    } else {
+                        el.style.display = 'none';
+                        button.textContent = '👁️‍🗨️';
+                    }
+                });
+            });
+        });
+        
+        // Funcionalidade para a área de testes Cypress
+        document.getElementById('test-button').addEventListener('click', () => {
+            const inputValue = document.getElementById('test-input').value;
+            const selectValue = document.getElementById('test-select').value;
+            
+            document.getElementById('test-result').textContent = 
+                `Você digitou: "${inputValue}" e selecionou: "${selectValue || 'Nada'}"`;
+        });
+        
+        // Efeitos de hover para elementos interativos
+        document.querySelectorAll('.skill-item, .test-target').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = 'scale(1.02)';
+                element.style.transition = 'transform 0.3s ease';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
